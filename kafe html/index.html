@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nar & Qəhvə Bistro — Bakı | Baku Motion Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: #110e0c; color: #f8f3ee; }
+    .font-serif-display { font-family: 'Playfair Display', serif; }
+    .glass-card { background: rgba(29, 23, 20, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(217, 155, 76, 0.16); }
+    .amber-grad { background: linear-gradient(135deg, #f59e0b 0%, #c26d1f 100%); }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="pb-24 md:pb-10">
+
+  <!-- Top Demo Banner -->
+  <div class="bg-amber-500/15 border-b border-amber-500/25 text-amber-200 text-xs py-2 px-4 text-center">
+    <span data-i18n="demoBanner">Demo portfel layihəsi: <strong>Baku Motion</strong> — Kafe və restoranınız üçün belə sayt 5 günə hazır olur</span>
+    <a href="https://wa.me/994553507887?text=Salam%2C%20kafe%20demo%20sayt%C4%B1n%C4%B1%20g%C3%B6rd%C3%BCm%2C%20%C9%99trafl%C4%B1%20m%C9%99lumat%20almaq%20ist%C9%99yir%C9%99m" target="_blank" class="underline font-semibold ml-2 text-amber-400 hover:text-amber-300" data-i18n="orderSimilar">Oxşarını sifariş et →</a>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 glass-card border-b border-white/10">
+    <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl amber-grad flex items-center justify-center text-stone-950 font-bold text-lg shadow-lg">
+          <i class="fa-solid fa-mug-hot"></i>
+        </div>
+        <div>
+          <h1 class="font-serif-display text-lg font-bold tracking-wide text-amber-100 leading-tight">NAR & QƏHVƏ</h1>
+          <p class="text-[11px] text-stone-400" data-i18n="subtitle">Müasir Bakı Bistrosu</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <button onclick="toggleLang()" id="lang-btn" class="px-2.5 py-1.5 rounded-lg border border-white/15 text-xs font-semibold text-stone-200 hover:border-amber-400 transition">RU</button>
+        <button onclick="openBookingModal()" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-amber-500/40 text-amber-300 text-xs font-semibold hover:bg-amber-500/10 transition">
+          <i class="fa-regular fa-calendar-check"></i>
+          <span data-i18n="bookTable">Masa bron et</span>
+        </button>
+        <button onclick="toggleCartDrawer()" class="relative px-3.5 py-2 rounded-xl amber-grad text-stone-950 text-xs font-bold flex items-center gap-2 shadow-lg hover:opacity-95 transition">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span id="cart-total-top">0 AZN</span>
+          <span id="cart-badge" class="hidden absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-rose-600 text-white text-[10px] font-bold flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(217,119,6,0.22),_transparent_65%)] pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto px-4 pt-10 pb-8 md:py-14 grid md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-7 space-y-5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span data-i18n="openNow">Açıqdır · 09:00 – 23:30 · Nizami küç., Bakı</span>
+        </div>
+        <h2 class="font-serif-display text-3xl sm:text-5xl font-bold leading-tight text-white" data-i18n="heroTitle">
+          Bakının mərkəzində ətirli qəhvə və isti mətbəx
+        </h2>
+        <p class="text-stone-300 text-sm sm:text-base leading-relaxed max-w-xl" data-i18n="heroDesc">
+          Onlayn menyudan seçin, masanı 30 saniyəyə bron edin və ya bir kliklə WhatsApp üzərindən çatdırılma sifariş verin.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-1">
+          <a href="#menu" class="px-6 py-3 rounded-xl amber-grad text-stone-950 font-bold text-sm shadow-lg hover:opacity-95 transition inline-flex items-center gap-2">
+            <i class="fa-solid fa-utensils"></i>
+            <span data-i18n="viewMenu">Menyuya bax</span>
+          </a>
+          <button onclick="openBookingModal()" class="px-6 py-3 rounded-xl glass-card text-amber-100 font-semibold text-sm hover:border-amber-400/50 transition inline-flex items-center gap-2">
+            <i class="fa-regular fa-clock"></i>
+            <span data-i18n="bookTable">Masa bron et</span>
+          </button>
+        </div>
+        <div class="grid grid-cols-3 gap-3 pt-3 max-w-md">
+          <div class="glass-card rounded-2xl p-3 text-center">
+            <div class="text-amber-400 font-bold text-lg">4.9 ★</div>
+            <div class="text-[11px] text-stone-400" data-i18n="statReviews">420+ rəy</div>
+          </div>
+          <div class="glass-card rounded-2xl p-3 text-center">
+            <div class="text-amber-400 font-bold text-lg">25 dəq</div>
+            <div class="text-[11px] text-stone-400" data-i18n="statDelivery">Sürətli çatdırılma</div>
+          </div>
+          <div class="glass-card rounded-2xl p-3 text-center">
+            <div class="text-amber-400 font-bold text-lg">QR</div>
+            <div class="text-[11px] text-stone-400" data-i18n="statMenu">Mobil menyu</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Editorial Visual Card -->
+      <div class="md:col-span-5">
+        <div class="glass-card rounded-3xl p-5 relative overflow-hidden">
+          <div class="rounded-2xl bg-gradient-to-br from-amber-900/50 via-stone-900 to-stone-950 p-6 border border-amber-500/20">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 text-[11px] font-semibold" data-i18n="chefChoice">Şefin seçimi</span>
+              <span class="text-amber-400 font-bold text-sm">18 AZN</span>
+            </div>
+            <svg viewBox="0 0 240 140" class="w-full h-32 mb-4">
+              <defs>
+                <radialGradient id="plateGrad" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#292524"/>
+                  <stop offset="100%" stop-color="#0c0a09"/>
+                </radialGradient>
+              </defs>
+              <circle cx="120" cy="72" r="56" fill="url(#plateGrad)" stroke="#d97706" stroke-width="1.5" stroke-opacity="0.5"/>
+              <circle cx="120" cy="72" r="42" fill="none" stroke="#f59e0b" stroke-dasharray="3 4" stroke-opacity="0.45"/>
+              <path d="M92 78 C98 56, 142 56, 148 78 C140 94, 100 94, 92 78 Z" fill="#b45309"/>
+              <circle cx="110" cy="68" r="5" fill="#dc2626"/>
+              <circle cx="128" cy="65" r="4" fill="#dc2626"/>
+              <circle cx="121" cy="77" r="4.5" fill="#16a34a"/>
+              <path d="M105 46 Q108 34 103 24" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+              <path d="M120 42 Q123 30 118 20" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+              <path d="M135 46 Q138 34 133 24" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>
+            </svg>
+            <h3 class="font-serif-display text-xl text-white font-semibold" data-i18n="featuredName">Nar souslu mal əti medalyonu</h3>
+            <p class="text-xs text-stone-400 mt-1" data-i18n="featuredDesc">Göycə nar şirəsi, qızardılmış kartof və təzə göyərti ilə.</p>
+            <button onclick="addToCart(3)" class="mt-4 w-full py-2.5 rounded-xl bg-white/10 hover:bg-amber-500 hover:text-stone-950 text-amber-200 text-xs font-bold transition">
+              + <span data-i18n="addToOrder">Sifarişə əlavə et</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Menu -->
+  <section id="menu" class="max-w-5xl mx-auto px-4 py-8">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+      <div>
+        <span class="text-xs font-semibold uppercase tracking-widest text-amber-400" data-i18n="menuLabel">Onlayn Menyu</span>
+        <h3 class="font-serif-display text-2xl sm:text-3xl font-bold text-white mt-1" data-i18n="menuHeading">Sevimli dadlar</h3>
+      </div>
+      <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1" id="category-tabs"></div>
+    </div>
+
+    <div id="menu-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </section>
+
+  <!-- Reviews & Location -->
+  <section class="max-w-5xl mx-auto px-4 py-8 grid md:grid-cols-2 gap-5">
+    <div class="glass-card rounded-3xl p-6 space-y-4">
+      <h4 class="font-serif-display text-xl font-bold text-amber-100" data-i18n="reviewsTitle">Qonaqlarımızın rəyləri</h4>
+      <div class="space-y-3">
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/5">
+          <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-white">Aysel R.</span><span class="text-amber-400">★★★★★</span></div>
+          <p class="text-xs text-stone-300" data-i18n="rev1">Qəhvəsi və səhər yeməyi əladır. Saytdan masanı 1 dəqiqəyə bron etdik, çox rahat idi.</p>
+        </div>
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/5">
+          <div class="flex justify-between text-xs mb-1"><span class="font-semibold text-white">Elvin M.</span><span class="text-amber-400">★★★★★</span></div>
+          <p class="text-xs text-stone-300" data-i18n="rev2">Nar souslu ət və tiramisu mütləq dadılmalıdır. Çatdırılma 20 dəqiqəyə gəldi.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-3xl p-6 flex flex-col justify-between space-y-4">
+      <div>
+        <h4 class="font-serif-display text-xl font-bold text-amber-100" data-i18n="locationTitle">Ünvan və əlaqə</h4>
+        <ul class="mt-4 space-y-2.5 text-sm text-stone-300">
+          <li class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-amber-400 w-4"></i><span data-i18n="address">Nizami küçəsi 84, Səbail rayonu, Bakı</span></li>
+          <li class="flex items-center gap-3"><i class="fa-regular fa-clock text-amber-400 w-4"></i><span data-i18n="hours">Hər gün: 09:00 – 23:30</span></li>
+          <li class="flex items-center gap-3"><i class="fa-solid fa-phone text-amber-400 w-4"></i><span>+994 55 350 78 87</span></li>
+        </ul>
+      </div>
+      <div class="flex flex-wrap gap-2.5 pt-2">
+        <a href="https://wa.me/994553507887?text=Salam%2C%20Nar%20%26%20Q%C9%99hv%C9%99%20Bistro%20il%C9%99%20%C9%99laq%C9%99%20saxlay%C4%B1ram" target="_blank" class="flex-1 text-center py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition">
+          <i class="fa-brands fa-whatsapp mr-1.5"></i> WhatsApp
+        </a>
+        <button onclick="openBookingModal()" class="flex-1 py-2.5 px-4 rounded-xl border border-amber-500/40 text-amber-300 hover:bg-amber-500/10 text-xs font-bold transition" data-i18n="bookTable">
+          Masa bron et
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="max-w-5xl mx-auto px-4 pt-4 pb-8 text-center text-xs text-stone-500 border-t border-white/10 mt-4">
+    <p>© 2026 Nar & Qəhvə Bistro · <span data-i18n="footerCredit">Sayt hazırlanıb:</span> <a href="https://wa.me/994553507887" class="text-amber-400 font-semibold hover:underline">Baku Motion</a> (@baku_motion)</p>
+  </footer>
+
+  <!-- Mobile Bottom Sticky Bar -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 glass-card border-t border-amber-500/20 px-4 py-3 flex items-center gap-2.5">
+    <button onclick="openBookingModal()" class="flex-1 py-2.5 rounded-xl border border-amber-500/40 text-amber-200 text-xs font-bold" data-i18n="bookTable">Masa bron et</button>
+    <button onclick="toggleCartDrawer()" class="flex-1 py-2.5 rounded-xl amber-grad text-stone-950 text-xs font-bold">
+      <i class="fa-solid fa-bag-shopping mr-1"></i> <span data-i18n="cartBtn">Səbət</span> (<span id="cart-total-mobile">0 AZN</span>)
+    </button>
+  </div>
+
+  <!-- Cart Drawer Modal -->
+  <div id="cart-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="w-full sm:max-w-md bg-stone-950 border border-amber-500/25 rounded-t-3xl sm:rounded-3xl p-6 max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between pb-4 border-b border-white/10">
+        <h4 class="font-serif-display text-xl font-bold text-white" data-i18n="yourOrder">Sifarişiniz</h4>
+        <button onclick="toggleCartDrawer()" class="text-stone-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="cart-items" class="py-4 space-y-3 overflow-y-auto flex-1"></div>
+      <div class="pt-4 border-t border-white/10 space-y-3">
+        <div class="flex gap-2 text-xs">
+          <button onclick="setOrderType('delivery')" id="type-delivery" class="flex-1 py-2 rounded-xl bg-amber-500 text-stone-950 font-bold" data-i18n="delivery">Çatdırılma</button>
+          <button onclick="setOrderType('table')" id="type-table" class="flex-1 py-2 rounded-xl bg-white/5 text-stone-300 font-semibold" data-i18n="dineIn">Masaya sifariş</button>
+        </div>
+        <input id="order-note" type="text" placeholder="Ünvan və ya masa nömrəsi..." class="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs text-white focus:outline-none focus:border-amber-400" />
+        <div class="flex justify-between items-center text-sm font-bold">
+          <span data-i18n="total">Cəmi:</span>
+          <span id="cart-modal-total" class="text-amber-400 text-lg">0 AZN</span>
+        </div>
+        <button onclick="sendWhatsAppOrder()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center justify-center gap-2 transition">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span data-i18n="sendOrderWA">WhatsApp ilə sifariş göndər</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div id="booking-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-stone-950 border border-amber-500/25 rounded-3xl p-6 space-y-4">
+      <div class="flex items-center justify-between">
+        <h4 class="font-serif-display text-xl font-bold text-white" data-i18n="bookTable">Masa bron et</h4>
+        <button onclick="closeBookingModal()" class="text-stone-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <input id="bk-name" type="text" placeholder="Adınız" class="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white focus:border-amber-400 outline-none" />
+        <div class="grid grid-cols-2 gap-2.5">
+          <input id="bk-date" type="date" class="px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white outline-none" />
+          <select id="bk-time" class="px-3.5 py-2.5 rounded-xl bg-stone-900 border border-white/10 text-white outline-none">
+            <option>12:00</option><option>14:00</option><option>18:00</option><option selected>19:30</option><option>21:00</option>
+          </select>
+        </div>
+        <select id="bk-guests" class="w-full px-3.5 py-2.5 rounded-xl bg-stone-900 border border-white/10 text-white outline-none">
+          <option value="2">2 nəfər</option><option value="4">4 nəfər</option><option value="6">6 nəfər</option><option value="8+">8+ nəfər</option>
+        </select>
+        <button onclick="sendWhatsAppBooking()" class="w-full py-3 rounded-xl amber-grad text-stone-950 font-bold text-sm mt-1">
+          <i class="fa-brands fa-whatsapp mr-1.5"></i> <span data-i18n="confirmBooking">WhatsApp ilə təsdiqlə</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PHONE = '994553507887';
+    let lang = 'az';
+    let activeCat = 'all';
+    let orderType = 'delivery';
+    let cart = {};
+
+    const i18n = {
+      az: {
+        demoBanner: 'Demo portfel layihəsi: <strong>Baku Motion</strong> — Kafe və restoranınız üçün belə sayt 5 günə hazır olur',
+        orderSimilar: 'Oxşarını sifariş et →',
+        subtitle: 'Müasir Bakı Bistrosu',
+        bookTable: 'Masa bron et',
+        openNow: 'Açıqdır · 09:00 – 23:30 · Nizami küç., Bakı',
+        heroTitle: 'Bakının mərkəzində ətirli qəhvə və isti mətbəx',
+        heroDesc: 'Onlayn menyudan seçin, masanı 30 saniyəyə bron edin və ya bir kliklə WhatsApp üzərindən çatdırılma sifariş verin.',
+        viewMenu: 'Menyuya bax',
+        statReviews: '420+ rəy',
+        statDelivery: 'Sürətli çatdırılma',
+        statMenu: 'Mobil menyu',
+        chefChoice: 'Şefin seçimi',
+        featuredName: 'Nar souslu mal əti medalyonu',
+        featuredDesc: 'Göycə nar şirəsi, qızardılmış kartof və təzə göyərti ilə.',
+        addToOrder: 'Sifarişə əlavə et',
+        menuLabel: 'Onlayn Menyu',
+        menuHeading: 'Sevimli dadlar',
+        reviewsTitle: 'Qonaqlarımızın rəyləri',
+        rev1: 'Qəhvəsi və səhər yeməyi əladır. Saytdan masanı 1 dəqiqəyə bron etdik, çox rahat idi.',
+        rev2: 'Nar souslu ət və tiramisu mütləq dadılmalıdır. Çatdırılma 20 dəqiqəyə gəldi.',
+        locationTitle: 'Ünvan və əlaqə',
+        address: 'Nizami küçəsi 84, Səbail rayonu, Bakı',
+        hours: 'Hər gün: 09:00 – 23:30',
+        footerCredit: 'Sayt hazırlanıb:',
+        cartBtn: 'Səbət',
+        yourOrder: 'Sifarişiniz',
+        delivery: 'Çatdırılma',
+        dineIn: 'Masaya sifariş',
+        total: 'Cəmi:',
+        sendOrderWA: 'WhatsApp ilə sifariş göndər',
+        confirmBooking: 'WhatsApp ilə təsdiqlə',
+        emptyCart: 'Səbət boşdur. Menyudan yemək əlavə edin.',
+        cats: { all: 'Hamısı', breakfast: 'Səhər yeməyi', main: 'Əsas yeməklər', coffee: 'Qəhvə & İçki', dessert: 'Desertlər' }
+      },
+      ru: {
+        demoBanner: 'Демо-проект портфолио: <strong>Baku Motion</strong> — Сайт для вашего кафе или ресторана за 5 дней',
+        orderSimilar: 'Заказать похожий →',
+        subtitle: 'Современное бистро в Баку',
+        bookTable: 'Бронь стола',
+        openNow: 'Открыто · 09:00 – 23:30 · ул. Низами, Баку',
+        heroTitle: 'Ароматный кофе и тёплая кухня в самом центре Баку',
+        heroDesc: 'Выбирайте блюда в онлайн-меню, бронируйте столик за 30 секунд или оформляйте доставку в один клик через WhatsApp.',
+        viewMenu: 'Смотреть меню',
+        statReviews: '420+ отзывов',
+        statDelivery: 'Быстрая доставка',
+        statMenu: 'QR-меню',
+        chefChoice: 'Выбор шефа',
+        featuredName: 'Медальон из говядины в гранатовом соусе',
+        featuredDesc: 'С гранатовым соусом, запечённым картофелем и свежей зеленью.',
+        addToOrder: 'Добавить в заказ',
+        menuLabel: 'Онлайн-меню',
+        menuHeading: 'Любимые блюда',
+        reviewsTitle: 'Отзывы гостей',
+        rev1: 'Отличный кофе и завтраки. Забронировали столик прямо с сайта за минуту — очень удобно.',
+        rev2: 'Говядина в гранатовом соусе и тирамису — просто супер. Доставили за 20 минут.',
+        locationTitle: 'Адрес и контакты',
+        address: 'ул. Низами 84, Сабаильский район, Баку',
+        hours: 'Ежедневно: 09:00 – 23:30',
+        footerCredit: 'Разработка сайта:',
+        cartBtn: 'Корзина',
+        yourOrder: 'Ваш заказ',
+        delivery: 'Доставка',
+        dineIn: 'За столик',
+        total: 'Итого:',
+        sendOrderWA: 'Отправить заказ в WhatsApp',
+        confirmBooking: 'Подтвердить в WhatsApp',
+        emptyCart: 'Корзина пуста. Добавьте блюда из меню.',
+        cats: { all: 'Все', breakfast: 'Завтраки', main: 'Основные', coffee: 'Кофе и напитки', dessert: 'Десерты' }
+      }
+    };
+
+    const menuItems = [
+      { id: 1, cat: 'breakfast', price: 14, icon: 'fa-egg', color: 'from-amber-700/40 to-stone-900', az: ['Bakı Səhər Yeməyi Seti', 'Pomidor-yumurta, kənd pendiri, bal, qaymaq və təzə təndir çörəyi'], ru: ['Бакинский завтрак (сет)', 'Помидор-юмурта, фермерский сыр, мёд, каймак и свежий тендир'] },
+      { id: 2, cat: 'breakfast', price: 11, icon: 'fa-bread-slice', color: 'from-emerald-800/40 to-stone-900', az: ['Avokado & Poşe Tost', 'Qızardılmış çörək, əzilmiş avokado, poşe yumurta və küncüt'], ru: ['Тост с авокадо и яйцом пашот', 'Хрустящий хлеб, спелый авокадо, яйцо пашот и кунжут'] },
+      { id: 3, cat: 'main', price: 18, icon: 'fa-fire-burner', color: 'from-rose-900/40 to-stone-900', az: ['Nar souslu mal əti', 'Göycə nar şirəsi, körpə kartof və ədviyyatlı göyərti'], ru: ['Говядина в гранатовом соусе', 'Соус наршараб, молодой картофель и ароматные травы'] },
+      { id: 4, cat: 'main', price: 15, icon: 'fa-bowl-food', color: 'from-orange-800/40 to-stone-900', az: ['Trüfel souslu Toyuq Pasta', 'Ev üsulu tagliatelle, qaymaqlı göbələk və parmezan'], ru: ['Паста с курицей и трюфелем', 'Домашние тальятелле, сливочные грибы и пармезан'] },
+      { id: 5, cat: 'coffee', price: 6, icon: 'fa-mug-saucer', color: 'from-amber-800/40 to-stone-900', az: ['İmza Fındıqlı Latte', '100% Arabica espresso, qovrulmuş fındıq siropu və ipək süd'], ru: ['Фирменный ореховый латте', '100% арабика, сироп жареного фундука и нежная молочная пенка'] },
+      { id: 6, cat: 'coffee', price: 7, icon: 'fa-wine-glass', color: 'from-red-900/40 to-stone-900', az: ['Təzə sıxılmış Nar Limonadı', 'Soyuq nar şirəsi, reyhan yarpağı və limon qabığı'], ru: ['Свежий гранатовый лимонад', 'Сок спелого граната, базилик и цедра лимона'] },
+      { id: 7, cat: 'dessert', price: 9, icon: 'fa-cake-candles', color: 'from-yellow-800/40 to-stone-900', az: ['San Sebastian Çizkeyk', 'İsti Belçika şokoladı ilə zərif çizkeyk'], ru: ['Чизкейк Сан-Себастьян', 'Нежный чизкейк с тёплым бельгийским шоколадом'] },
+      { id: 8, cat: 'dessert', price: 8, icon: 'fa-cookie-bite', color: 'from-amber-900/40 to-stone-900', az: ['Klassik Tiramisu', 'Maskarpone kremi və espressoya batırılmış savoyardi'], ru: ['Классический тирамису', 'Крем маскарпоне и савоярди с ароматом свежего эспрессо'] }
+    ];
+
+    function applyI18n() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) el.innerHTML = i18n[lang][key];
+      });
+      document.getElementById('lang-btn').textContent = lang === 'az' ? 'RU' : 'AZ';
+      renderTabs();
+      renderMenu();
+      renderCart();
+    }
+
+    function toggleLang() { lang = lang === 'az' ? 'ru' : 'az'; applyI18n(); }
+
+    function renderTabs() {
+      const cats = i18n[lang].cats;
+      document.getElementById('category-tabs').innerHTML = Object.entries(cats).map(([k, label]) => `
+        <button onclick="setCat('${k}')" class="px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition ${activeCat === k ? 'amber-grad text-stone-950 font-bold' : 'glass-card text-stone-300 hover:text-white'}">${label}</button>
+      `).join('');
+    }
+
+    function setCat(c) { activeCat = c; renderTabs(); renderMenu(); }
+
+    function renderMenu() {
+      const items = activeCat === 'all' ? menuItems : menuItems.filter(i => i.cat === activeCat);
+      document.getElementById('menu-grid').innerHTML = items.map(item => {
+        const qty = cart[item.id] || 0;
+        return `
+        <div class="glass-card rounded-2xl p-4 flex flex-col justify-between hover:border-amber-500/40 transition">
+          <div>
+            <div class="h-24 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-between px-4 mb-3 border border-white/5">
+              <i class="fa-solid ${item.icon} text-3xl text-amber-300/90"></i>
+              <span class="px-2.5 py-1 rounded-lg bg-black/40 text-amber-300 font-bold text-sm">${item.price} AZN</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">${item[lang][0]}</h4>
+            <p class="text-xs text-stone-400 mt-1 leading-relaxed">${item[lang][1]}</p>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-xs text-stone-500">${i18n[lang].cats[item.cat]}</span>
+            ${qty > 0 ? `
+              <div class="flex items-center gap-2 bg-amber-500/15 border border-amber-500/40 rounded-xl px-2 py-1">
+                <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 rounded-lg bg-stone-900 text-amber-300 font-bold">-</button>
+                <span class="text-xs font-bold text-white w-4 text-center">${qty}</span>
+                <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 rounded-lg amber-grad text-stone-950 font-bold">+</button>
+              </div>
+            ` : `
+              <button onclick="addToCart(${item.id})" class="px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-amber-500 hover:text-stone-950 text-amber-200 text-xs font-bold transition">+ ${lang === 'az' ? 'Əlavə et' : 'В корзину'}</button>
+            `}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    function addToCart(id) { cart[id] = (cart[id] || 0) + 1; renderMenu(); renderCart(); }
+    function updateQty(id, delta) {
+      cart[id] = (cart[id] || 0) + delta;
+      if (cart[id] <= 0) delete cart[id];
+      renderMenu(); renderCart();
+    }
+
+    function renderCart() {
+      let total = 0, count = 0;
+      const rows = Object.entries(cart).map(([id, qty]) => {
+        const item = menuItems.find(m => m.id == id);
+        total += item.price * qty; count += qty;
+        return `
+          <div class="flex items-center justify-between bg-white/5 rounded-xl p-3">
+            <div>
+              <div class="text-xs font-semibold text-white">${item[lang][0]}</div>
+              <div class="text-[11px] text-amber-400">${item.price} AZN × ${qty} = ${item.price * qty} AZN</div>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 rounded-lg bg-white/10 text-xs">-</button>
+              <span class="text-xs font-bold w-4 text-center">${qty}</span>
+              <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 rounded-lg amber-grad text-stone-950 text-xs font-bold">+</button>
+            </div>
+          </div>`;
+      });
+      document.getElementById('cart-items').innerHTML = rows.length ? rows.join('') : `<p class="text-xs text-stone-400 text-center py-8">${i18n[lang].emptyCart}</p>`;
+      document.getElementById('cart-total-top').textContent = `${total} AZN`;
+      document.getElementById('cart-total-mobile').textContent = `${total} AZN`;
+      document.getElementById('cart-modal-total').textContent = `${total} AZN`;
+      const badge = document.getElementById('cart-badge');
+      badge.textContent = count;
+      badge.classList.toggle('hidden', count === 0);
+    }
+
+    function setOrderType(t) {
+      orderType = t;
+      document.getElementById('type-delivery').className = t === 'delivery' ? 'flex-1 py-2 rounded-xl bg-amber-500 text-stone-950 font-bold' : 'flex-1 py-2 rounded-xl bg-white/5 text-stone-300 font-semibold';
+      document.getElementById('type-table').className = t === 'table' ? 'flex-1 py-2 rounded-xl bg-amber-500 text-stone-950 font-bold' : 'flex-1 py-2 rounded-xl bg-white/5 text-stone-300 font-semibold';
+    }
+
+    function toggleCartDrawer() { document.getElementById('cart-modal').classList.toggle('hidden'); }
+    function openBookingModal() {
+      const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+      if (!document.getElementById('bk-date').value) document.getElementById('bk-date').value = tomorrow;
+      document.getElementById('booking-modal').classList.remove('hidden');
+    }
+    function closeBookingModal() { document.getElementById('booking-modal').classList.add('hidden'); }
+
+    function sendWhatsAppOrder() {
+      const entries = Object.entries(cart);
+      if (!entries.length) return alert(i18n[lang].emptyCart);
+      let total = 0;
+      const lines = entries.map(([id, qty]) => {
+        const it = menuItems.find(m => m.id == id);
+        total += it.price * qty;
+        return `• ${it[lang][0]} × ${qty} (${it.price * qty} AZN)`;
+      }).join('\n');
+      const note = document.getElementById('order-note').value || '-';
+      const mode = orderType === 'delivery' ? (lang === 'az' ? 'Çatdırılma' : 'Доставка') : (lang === 'az' ? 'Masaya sifariş' : 'За столик');
+      const msg = `${lang === 'az' ? 'Salam! Yeni sifariş (Nar & Qəhvə):' : 'Здравствуйте! Новый заказ (Nar & Qəhvə):'}\n${lines}\n\n${lang === 'az' ? 'Format' : 'Формат'}: ${mode}\n${lang === 'az' ? 'Qeyd/Ünvan' : 'Адрес/Стол'}: ${note}\n${lang === 'az' ? 'Cəmi' : 'Итого'}: ${total} AZN`;
+      window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function sendWhatsAppBooking() {
+      const name = document.getElementById('bk-name').value || 'Qonaq';
+      const date = document.getElementById('bk-date').value || '-';
+      const time = document.getElementById('bk-time').value;
+      const guests = document.getElementById('bk-guests').value;
+      const msg = `${lang === 'az' ? 'Salam! Masa bron etmək istəyirəm:' : 'Здравствуйте! Хочу забронировать столик:'}\nAd: ${name}\nTarix: ${date}\nSaat: ${time}\nQonaq sayı: ${guests}`;
+      window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    applyI18n();
+  </script>
+</body>
+</html>

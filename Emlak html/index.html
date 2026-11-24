@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caspian Estate Baku — Daşınmaz Əmlak & Villalar | Baku Motion Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background: #090d16; color: #f8fafc; }
+    .glass { background: rgba(17, 24, 39, 0.8); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .gold-grad { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="pb-20 md:pb-10">
+
+  <!-- Demo Banner -->
+  <div class="bg-amber-500/15 border-b border-amber-500/25 text-amber-200 text-xs py-2 px-4 text-center">
+    <span data-i18n="demoBanner">Demo portfel layihəsi: <strong>Baku Motion</strong> — Daşınmaz əmlak və villa kirayəsi üçün hazır sayt kataloqu</span>
+    <a href="https://wa.me/994553507887?text=Salam%2C%20da%C5%9F%C4%B1nmaz%20%C9%99mlak%20demo%20sayt%C4%B1n%C4%B1%20g%C3%B6rd%C3%BCm" target="_blank" class="underline font-semibold ml-2 text-amber-400" data-i18n="orderSimilar">Oxşarını sifariş et →</a>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 glass border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl gold-grad flex items-center justify-center text-slate-950 text-lg font-extrabold shadow-lg">
+          <i class="fa-solid fa-building-columns"></i>
+        </div>
+        <div>
+          <h1 class="text-sm sm:text-base font-extrabold tracking-wide text-amber-400 leading-tight">CASPIAN ESTATE</h1>
+          <p class="text-[11px] text-slate-400" data-i18n="sub">Bakı & Abşeron Əmlak Kataloqu</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <button onclick="toggleLang()" id="lang-btn" class="px-2.5 py-1.5 rounded-lg border border-slate-700 text-xs font-semibold text-slate-200 hover:border-amber-400">RU</button>
+        <a href="#list-owner" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-amber-500/40 text-amber-300 text-xs font-semibold hover:bg-amber-500/10">
+          <i class="fa-solid fa-plus"></i> <span data-i18n="addProp">Elan yerləşdir</span>
+        </a>
+        <a href="https://wa.me/994553507887?text=Salam%2C%20%C9%99mlak%20se%C3%A7imi%20%C3%BC%C3%A7%C3%BCn%20m%C9%99sl%C9%99h%C9%99t%20almaq%20ist%C9%99yir%C9%99m" target="_blank" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5">
+          <i class="fa-brands fa-whatsapp"></i> <span class="hidden sm:inline">WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Quick Filter -->
+  <section class="relative overflow-hidden border-b border-slate-800/80">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(245,158,11,0.16),_transparent_55%)] pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto px-4 py-10 md:py-14">
+      <div class="max-w-3xl space-y-4">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+          <i class="fa-solid fa-shield-halved"></i> <span data-i18n="badge">Yoxlanılmış obyektlər · Birbaşa əlaqə</span>
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold leading-tight text-white" data-i18n="heroTitle">
+          Bakıda premium mənzillər və hovuzlu villalar
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base max-w-2xl" data-i18n="heroDesc">
+          Rayon və büdcəyə görə süzün, aylıq ödənişi hesablayın və bəyəndiyiniz obyektə bir kliklə WhatsApp üzərindən baxış təyin edin.
+        </p>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="mt-8 glass rounded-2xl p-4 space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex gap-2 overflow-x-auto no-scrollbar" id="deal-tabs"></div>
+          <div class="relative w-full sm:w-64">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input id="search-input" oninput="renderProperties()" type="text" placeholder="Rayon və ya açar söz..." class="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:border-amber-400 outline-none" />
+          </div>
+        </div>
+        <div class="flex gap-2 overflow-x-auto no-scrollbar pt-1" id="district-pills"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Grid -->
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg sm:text-xl font-bold text-white" data-i18n="catalogHeading">Seçilmiş obyektlər</h3>
+      <span id="results-count" class="text-xs text-slate-400">6 obyekt</span>
+    </div>
+    <div id="properties-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+  </main>
+
+  <!-- Owner CTA Section -->
+  <section id="list-owner" class="max-w-6xl mx-auto px-4 py-6">
+    <div class="glass rounded-3xl p-6 md:p-8 border border-amber-500/25 grid md:grid-cols-12 gap-6 items-center">
+      <div class="md:col-span-7 space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-400" data-i18n="ownerLabel">Mülkiyyətçilər üçün</span>
+        <h4 class="text-2xl font-extrabold text-white" data-i18n="ownerTitle">Mənzil və ya villanızı tez satmaq/kirayə vermək istəyirsiniz?</h4>
+        <p class="text-xs sm:text-sm text-slate-300" data-i18n="ownerDesc">Məlumatları göndərin — peşəkar çəkiliş, sayt kataloqu və Instagram/TikTok reklamı ilə ən qısa zamanda alıcı tapaq.</p>
+      </div>
+      <div class="md:col-span-5 space-y-2.5">
+        <input id="own-loc" type="text" placeholder="Rayon (məs: Ağ Şəhər, Mərdəkan)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none focus:border-amber-400" />
+        <div class="grid grid-cols-2 gap-2.5">
+          <select id="own-type" class="px-3 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none">
+            <option value="Satış">Satış</option>
+            <option value="Kirayə">Kirayə</option>
+            <option value="Günlük Villa">Günlük Villa</option>
+          </select>
+          <input id="own-price" type="text" placeholder="Qiymət (AZN)" class="px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none focus:border-amber-400" />
+        </div>
+        <button onclick="sendOwnerRequest()" class="w-full py-3 rounded-xl gold-grad text-slate-950 font-extrabold text-xs hover:opacity-95 transition">
+          <i class="fa-brands fa-whatsapp mr-1.5"></i> <span data-i18n="sendOwner">WhatsApp-a göndər</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto px-4 pt-6 pb-8 text-center text-xs text-slate-500 border-t border-slate-800/80 mt-6">
+    <p>© 2026 Caspian Estate Baku · <span data-i18n="footerCredit">Sayt hazırlanıb:</span> <a href="https://wa.me/994553507887" class="text-amber-400 font-semibold hover:underline">Baku Motion</a> (@baku_motion)</p>
+  </footer>
+
+  <!-- Property Detail Modal -->
+  <div id="detail-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="w-full sm:max-w-lg bg-slate-950 border border-amber-500/30 rounded-t-3xl sm:rounded-3xl p-6 max-h-[90vh] overflow-y-auto space-y-4">
+      <div class="flex items-start justify-between gap-3">
+        <div>
+          <span id="md-badge" class="inline-block px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 text-[11px] font-bold mb-1.5"></span>
+          <h4 id="md-title" class="text-lg font-extrabold text-white"></h4>
+          <p id="md-loc" class="text-xs text-slate-400 mt-0.5"></p>
+        </div>
+        <button onclick="closeDetail()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div id="md-specs" class="grid grid-cols-3 gap-2.5 text-center"></div>
+      <p id="md-desc" class="text-xs sm:text-sm text-slate-300 leading-relaxed"></p>
+      <div id="md-tags" class="flex flex-wrap gap-1.5"></div>
+
+      <!-- Calculator box -->
+      <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2.5">
+        <div class="flex justify-between items-center text-xs">
+          <span id="calc-label" class="text-slate-300 font-semibold"></span>
+          <span id="calc-result" class="text-amber-400 font-extrabold text-sm"></span>
+        </div>
+        <input id="calc-slider" type="range" oninput="updateCalc()" class="w-full accent-amber-500" />
+        <div class="flex justify-between text-[11px] text-slate-500">
+          <span id="calc-min"></span><span id="calc-val" class="text-white font-semibold"></span><span id="calc-max"></span>
+        </div>
+      </div>
+
+      <button onclick="inquireCurrent()" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center justify-center gap-2 transition">
+        <i class="fa-brands fa-whatsapp text-base"></i> <span data-i18n="scheduleViewing">WhatsApp ilə baxış təyin et</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const PHONE = '994553507887';
+    let lang = 'az';
+    let activeDeal = 'all';
+    let activeDistrict = 'all';
+    let currentProp = null;
+
+    const i18n = {
+      az: {
+        demoBanner: 'Demo portfel layihəsi: <strong>Baku Motion</strong> — Daşınmaz əmlak və villa kirayəsi üçün hazır sayt kataloqu',
+        orderSimilar: 'Oxşarını sifariş et →',
+        sub: 'Bakı & Abşeron Əmlak Kataloqu',
+        addProp: 'Elan yerləşdir',
+        badge: 'Yoxlanılmış obyektlər · Birbaşa əlaqə',
+        heroTitle: 'Bakıda premium mənzillər və hovuzlu villalar',
+        heroDesc: 'Rayon və büdcəyə görə süzün, aylıq ödənişi hesablayın və bəyəndiyiniz obyektə bir kliklə WhatsApp üzərindən baxış təyin edin.',
+        catalogHeading: 'Seçilmiş obyektlər',
+        ownerLabel: 'Mülkiyyətçilər üçün',
+        ownerTitle: 'Mənzil və ya villanızı tez satmaq/kirayə vermək istəyirsiniz?',
+        ownerDesc: 'Məlumatları göndərin — peşəkar çəkiliş, sayt kataloqu və Instagram/TikTok reklamı ilə ən qısa zamanda alıcı tapaq.',
+        sendOwner: 'WhatsApp-a göndər',
+        footerCredit: 'Sayt hazırlanıb:',
+        scheduleViewing: 'WhatsApp ilə baxış təyin et',
+        deals: { all: 'Hamısı', sale: 'Satış', rent: 'Aylıq kirayə', daily: 'Günlük Villa' },
+        allDistricts: 'Bütün rayonlar',
+        detailsBtn: 'Ətraflı bax',
+        rooms: 'otaq',
+        unitSale: 'AZN', unitRent: 'AZN / ay', unitDaily: 'AZN / gün'
+      },
+      ru: {
+        demoBanner: 'Демо-проект портфолио: <strong>Baku Motion</strong> — Готовый каталог недвижимости и аренды вилл в Баку',
+        orderSimilar: 'Заказать похожий →',
+        sub: 'Каталог недвижимости Баку и Абшерон',
+        addProp: 'Добавить объект',
+        badge: 'Проверенные объекты · Прямой контакт',
+        heroTitle: 'Премиальные квартиры и виллы с бассейном в Баку',
+        heroDesc: 'Фильтруйте по району и бюджету, рассчитывайте стоимость и назначайте просмотр в один клик через WhatsApp.',
+        catalogHeading: 'Актуальные объекты',
+        ownerLabel: 'Для собственников',
+        ownerTitle: 'Хотите быстро продать или сдать квартиру/виллу?',
+        ownerDesc: 'Отправьте параметры объекта — сделаем съёмку, разместим на сайте и запустим рекламу в Instagram и TikTok.',
+        sendOwner: 'Отправить в WhatsApp',
+        footerCredit: 'Разработка сайта:',
+        scheduleViewing: 'Записаться на просмотр в WhatsApp',
+        deals: { all: 'Все', sale: 'Продажа', rent: 'Аренда (мес.)', daily: 'Виллы посуточно' },
+        allDistricts: 'Все районы',
+        detailsBtn: 'Подробнее',
+        rooms: 'комн.',
+        unitSale: 'AZN', unitRent: 'AZN / мес', unitDaily: 'AZN / сутки'
+      }
+    };
+
+    const properties = [
+      {
+        id: 1, deal: 'sale', district: 'Ağ Şəhər', price: 345000, area: 128, rooms: 3, grad: 'from-amber-700/35 via-slate-900 to-slate-950', icon: 'fa-city',
+        az: { title: 'Ağ Şəhər — 3 otaqlı təmirli mənzil', desc: 'Yeni tikili, dənizə açılan eyvan, yeraltı parkinq, kupça (çıxarış) mövcuddur.', tags: ['Kupça var', 'Dəniz mənzərəsi', 'Parkinq'] },
+        ru: { title: 'Белый Город — 3-комн. квартира с ремонтом', desc: 'Новостройка, балкон с видом на море, подземный паркинг, купчая на руках.', tags: ['Купчая', 'Вид на море', 'Паркинг'] }
+      },
+      {
+        id: 2, deal: 'daily', district: 'Mərdəkan', price: 280, area: 260, rooms: 5, grad: 'from-cyan-700/35 via-slate-900 to-slate-950', icon: 'fa-water-ladder',
+        az: { title: 'Mərdəkan — İsti hovuzlu modern villa', desc: '6 sot həyət, filtrli isti hovuz, manqal zonası, sürətli Wi-Fi və 10 nəfərlik qonaq otağı.', tags: ['İsti hovuz', 'Manqal', '6 sot'] },
+        ru: { title: 'Мардакян — Модерн вилла с тёплым бассейном', desc: 'Участок 6 соток, бассейн с подогревом, зона барбекю, быстрый Wi-Fi.', tags: ['Тёплый бассейн', 'Барбекю', '6 соток'] }
+      },
+      {
+        id: 3, deal: 'sale', district: 'Bilgəh', price: 620000, area: 340, rooms: 6, grad: 'from-indigo-700/35 via-slate-900 to-slate-950', icon: 'fa-house-chimney',
+        az: { title: 'Bilgəh — Dənizdən 5 dəqiqəlik bağ evi', desc: '8 sot torpaqda 2 mərtəbəli villa, tam əşyalı, kamera nəzarəti və böyük yaşıllıq bağ.', tags: ['Tam əşyalı', 'Hovuz', 'Kupça'] },
+        ru: { title: 'Бильгя — Вилла в 5 минутах от моря', desc: '2-этажная вилла на 8 сотках, полностью меблирована, видеонаблюдение и сад.', tags: ['С мебелью', 'Бассейн', 'Купчая'] }
+      },
+      {
+        id: 4, deal: 'rent', district: 'Nərimanov', price: 1200, area: 86, rooms: 2, grad: 'from-emerald-700/35 via-slate-900 to-slate-950', icon: 'fa-building',
+        az: { title: 'Nərimanov — Metroya yaxın 2 otaqlı', desc: 'Gənclik və Nərimanov metrolarına 6 dəqiqə, yeni mebel, kombi sistemi və sürətli internet.', tags: ['Yeni təmir', 'Kombi', 'Metroya yaxın'] },
+        ru: { title: 'Нариманов — 2-комн. рядом с метро', desc: '6 минут до метро, новая мебель, система комби и высокоскоростной интернет.', tags: ['Свежий ремонт', 'Комби', 'Рядом метро'] }
+      },
+      {
+        id: 5, deal: 'daily', district: 'Bilgəh', price: 350, area: 310, rooms: 5, grad: 'from-amber-600/35 via-slate-900 to-slate-950', icon: 'fa-umbrella-beach',
+        az: { title: 'Bilgəh — Panoramik terraslı lüks villa', desc: 'Ailəvi istirahət üçün sakit məkan, panoram pəncərələr, sauna və filtrli hovuz.', tags: ['Sauna', 'Hovuz', 'Terras'] },
+        ru: { title: 'Бильгя — Люкс вилла с панорамной террасой', desc: 'Тихое место для семейного отдыха, панорамные окна, сауна и бассейн.', tags: ['Сауна', 'Бассейн', 'Терраса'] }
+      },
+      {
+        id: 6, deal: 'rent', district: 'Səbail', price: 2400, area: 145, rooms: 4, grad: 'from-rose-700/35 via-slate-900 to-slate-950', icon: 'fa-briefcase',
+        az: { title: 'Səbail — Bulvar mənzərəli mənzil / ofis', desc: 'Şəhərin biznes mərkəzində geniş otaqlar, 24/7 mühafizə və resepsiyon xidməti.', tags: ['Mərkəz', '24/7 Mühafizə', 'Premium'] },
+        ru: { title: 'Сабаил — Апартаменты / офис с видом на Бульвар', desc: 'Просторные комнаты в деловом центре, охрана 24/7 и консьерж-сервис.', tags: ['Центр', 'Охрана 24/7', 'Премиум'] }
+      }
+    ];
+
+    const districts = ['Ağ Şəhər', 'Mərdəkan', 'Bilgəh', 'Nərimanov', 'Səbail'];
+
+    function formatPrice(p, deal) {
+      const unit = deal === 'sale' ? i18n[lang].unitSale : deal === 'rent' ? i18n[lang].unitRent : i18n[lang].unitDaily;
+      return `${p.toLocaleString('ru-RU')} ${unit}`;
+    }
+
+    function applyI18n() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (i18n[lang][k]) el.innerHTML = i18n[lang][k];
+      });
+      document.getElementById('lang-btn').textContent = lang === 'az' ? 'RU' : 'AZ';
+      renderControls();
+      renderProperties();
+    }
+
+    function toggleLang() { lang = lang === 'az' ? 'ru' : 'az'; applyI18n(); }
+
+    function renderControls() {
+      document.getElementById('deal-tabs').innerHTML = Object.entries(i18n[lang].deals).map(([k, label]) => `
+        <button onclick="setDeal('${k}')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition ${activeDeal === k ? 'gold-grad text-slate-950' : 'bg-slate-900 text-slate-300 hover:text-white border border-slate-800'}">${label}</button>
+      `).join('');
+
+      document.getElementById('district-pills').innerHTML = [
+        `<button onclick="setDistrict('all')" class="px-3 py-1.5 rounded-lg text-[11px] font-semibold whitespace-nowrap ${activeDistrict === 'all' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-slate-900/70 text-slate-400 border border-slate-800'}">${i18n[lang].allDistricts}</button>`,
+        ...districts.map(d => `<button onclick="setDistrict('${d}')" class="px-3 py-1.5 rounded-lg text-[11px] font-semibold whitespace-nowrap ${activeDistrict === d ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-slate-900/70 text-slate-400 border border-slate-800'}">${d}</button>`)
+      ].join('');
+    }
+
+    function setDeal(d) { activeDeal = d; renderControls(); renderProperties(); }
+    function setDistrict(d) { activeDistrict = d; renderControls(); renderProperties(); }
+
+    function renderProperties() {
+      const q = (document.getElementById('search-input').value || '').toLowerCase();
+      const filtered = properties.filter(p => {
+        if (activeDeal !== 'all' && p.deal !== activeDeal) return false;
+        if (activeDistrict !== 'all' && p.district !== activeDistrict) return false;
+        if (q && !(`${p.district} ${p[lang].title} ${p[lang].desc}`).toLowerCase().includes(q)) return false;
+        return true;
+      });
+      document.getElementById('results-count').textContent = `${filtered.length} ${lang === 'az' ? 'obyekt' : 'объект(ов)'}`;
+      document.getElementById('properties-grid').innerHTML = filtered.map(p => `
+        <div class="glass rounded-3xl overflow-hidden flex flex-col justify-between hover:border-amber-500/40 transition group">
+          <div>
+            <div class="h-40 bg-gradient-to-br ${p.grad} p-4 flex flex-col justify-between relative">
+              <div class="flex justify-between items-start">
+                <span class="px-2.5 py-1 rounded-lg bg-black/50 backdrop-blur text-amber-300 text-[11px] font-bold">${i18n[lang].deals[p.deal]}</span>
+                <span class="px-2.5 py-1 rounded-lg bg-black/50 backdrop-blur text-slate-200 text-[11px] font-medium"><i class="fa-solid fa-location-dot text-amber-400 mr-1"></i>${p.district}</span>
+              </div>
+              <div class="flex items-end justify-between">
+                <div class="text-xl font-extrabold text-white drop-shadow">${formatPrice(p.price, p.deal)}</div>
+                <i class="fa-solid ${p.icon} text-4xl text-white/20 group-hover:text-amber-400/40 transition"></i>
+              </div>
+            </div>
+            <div class="p-5 space-y-3">
+              <h4 class="font-bold text-white text-sm sm:text-base leading-snug">${p[lang].title}</h4>
+              <div class="flex items-center gap-4 text-xs text-slate-400">
+                <span><i class="fa-solid fa-maximize mr-1 text-amber-400"></i>${p.area} m²</span>
+                <span><i class="fa-solid fa-door-open mr-1 text-amber-400"></i>${p.rooms} ${i18n[lang].rooms}</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                ${p[lang].tags.map(t => `<span class="px-2 py-0.5 rounded-md bg-white/5 text-slate-300 text-[10px] font-medium">${t}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+          <div class="px-5 pb-5 flex gap-2">
+            <button onclick="openDetail(${p.id})" class="flex-1 py-2.5 rounded-xl gold-grad text-slate-950 font-bold text-xs hover:opacity-95 transition">${i18n[lang].detailsBtn}</button>
+            <button onclick="quickWA(${p.id})" class="px-3.5 py-2.5 rounded-xl bg-emerald-600/20 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-600 hover:text-white transition"><i class="fa-brands fa-whatsapp"></i></button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function openDetail(id) {
+      currentProp = properties.find(p => p.id === id);
+      document.getElementById('md-badge').textContent = `${i18n[lang].deals[currentProp.deal]} · ${formatPrice(currentProp.price, currentProp.deal)}`;
+      document.getElementById('md-title').textContent = currentProp[lang].title;
+      document.getElementById('md-loc').textContent = `${currentProp.district}, Bakı`;
+      document.getElementById('md-desc').textContent = currentProp[lang].desc;
+      document.getElementById('md-specs').innerHTML = `
+        <div class="p-3 rounded-xl bg-white/5"><div class="text-amber-400 font-bold text-sm">${currentProp.area} m²</div><div class="text-[10px] text-slate-400">${lang === 'az' ? 'Sahə' : 'Площадь'}</div></div>
+        <div class="p-3 rounded-xl bg-white/5"><div class="text-amber-400 font-bold text-sm">${currentProp.rooms}</div><div class="text-[10px] text-slate-400">${lang === 'az' ? 'Otaq' : 'Комнат'}</div></div>
+        <div class="p-3 rounded-xl bg-white/5"><div class="text-amber-400 font-bold text-sm">${currentProp.district}</div><div class="text-[10px] text-slate-400">${lang === 'az' ? 'Rayon' : 'Район'}</div></div>
+      `;
+      document.getElementById('md-tags').innerHTML = currentProp[lang].tags.map(t => `<span class="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/25 text-amber-200 text-[11px]">${t}</span>`).join('');
+
+      const slider = document.getElementById('calc-slider');
+      if (currentProp.deal === 'daily') {
+        slider.min = 1; slider.max = 14; slider.value = 3;
+        document.getElementById('calc-label').textContent = lang === 'az' ? 'Gün sayına görə hesabla' : 'Расчёт по количеству суток';
+        document.getElementById('calc-min').textContent = '1'; document.getElementById('calc-max').textContent = '14';
+      } else if (currentProp.deal === 'rent') {
+        slider.min = 1; slider.max = 12; slider.value = 6;
+        document.getElementById('calc-label').textContent = lang === 'az' ? 'Müddətə görə ümumi məbləğ' : 'Сумма за период аренды';
+        document.getElementById('calc-min').textContent = '1'; document.getElementById('calc-max').textContent = '12';
+      } else {
+        slider.min = 5; slider.max = 25; slider.value = 15;
+        document.getElementById('calc-label').textContent = lang === 'az' ? 'Təxmini ipoteka (20% ilkin, 8%)' : 'Примерная ипотека (20% взнос, 8%)';
+        document.getElementById('calc-min').textContent = '5 il'; document.getElementById('calc-max').textContent = '25 il';
+      }
+      updateCalc();
+      document.getElementById('detail-modal').classList.remove('hidden');
+    }
+
+    function updateCalc() {
+      if (!currentProp) return;
+      const v = Number(document.getElementById('calc-slider').value);
+      if (currentProp.deal === 'daily') {
+        document.getElementById('calc-val').textContent = `${v} ${lang === 'az' ? 'gün' : 'сут.'}`;
+        document.getElementById('calc-result').textContent = `${(v * currentProp.price).toLocaleString('ru-RU')} AZN`;
+      } else if (currentProp.deal === 'rent') {
+        document.getElementById('calc-val').textContent = `${v} ${lang === 'az' ? 'ay' : 'мес.'}`;
+        document.getElementById('calc-result').textContent = `${(v * currentProp.price).toLocaleString('ru-RU')} AZN`;
+      } else {
+        const principal = currentProp.price * 0.8;
+        const r = 0.08 / 12;
+        const n = v * 12;
+        const monthly = Math.round(principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1));
+        document.getElementById('calc-val').textContent = `${v} ${lang === 'az' ? 'il' : 'лет'}`;
+        document.getElementById('calc-result').textContent = `~${monthly.toLocaleString('ru-RU')} AZN / ${lang === 'az' ? 'ay' : 'мес'}`;
+      }
+    }
+
+    function closeDetail() { document.getElementById('detail-modal').classList.add('hidden'); }
+    function quickWA(id) { currentProp = properties.find(p => p.id === id); inquireCurrent(); }
+
+    function inquireCurrent() {
+      const msg = `${lang === 'az' ? 'Salam! Bu obyektlə maraqlanıram:' : 'Здравствуйте! Интересует объект:'}\n${currentProp[lang].title}\nQiymət: ${formatPrice(currentProp.price, currentProp.deal)}\nBaxış təyin etmək istəyirəm.`;
+      window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function sendOwnerRequest() {
+      const loc = document.getElementById('own-loc').value || '-';
+      const type = document.getElementById('own-type').value;
+      const price = document.getElementById('own-price').value || '-';
+      const msg = `Salam! Obyektimi yerləşdirmək istəyirəm:\nNöv: ${type}\nRayon: ${loc}\nQiymət: ${price} AZN`;
+      window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    applyI18n();
+  </script>
+</body>
+</html>
